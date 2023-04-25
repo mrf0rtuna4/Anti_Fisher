@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Проверка подозрительных ссылок</title>
+    <style>
+      body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0062cc;
+}
+
+#result {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Проверка подозрительных ссылок</h1>
+      <p>Введите ссылку для проверки:</p>
+      <input type="text" id="url-input">
+      <br><br>
+      <button onclick="checkUrl()">Проверить</button>
+      <br><br>
+      <p id="result"></p>
+    </div>
+
+    <script>
+      function checkUrl() {
+        const url = document.getElementById("url-input").value;
+        const suspiciousPattern = /(https?|ftp):\/\/(www\.)?[\w-]+\.[\w]{2,}(\/.*)?/i;
+        const isSuspicious = suspiciousPattern.test(url);
+        const resultElement = document.getElementById("result");
+        if (isSuspicious) {
+          resultElement.innerText = "Ссылка подозрительная!";
+        } else {
+          resultElement.innerText = "Ссылка безопасная.";
+        }
+      }
+    </script>
+  </body>
+</html>
