@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Проверка подозрительных ссылок</title>
+    <style>
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 0 5px #ccc;
+        width: 80%;
+        margin-right: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        color: #fff;
+        background-color: #007bff;
+        cursor: pointer;
+        box-shadow: 0 0 5px #ccc;
+      }
+
+      button:hover {
+        background-color: #0062cc;
+      }
+
+      #result {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      #result.warning {
+        color: #ff6b6b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Проверка подозрительных ссылок</h1>
+      <p>Введите ссылку для проверки:</p>
+      <input type="text" id="url-input">
+      <button id="check-button">Проверить</button>
+      <button id="clear-button">Очистить</button>
+      <p id="result"></p>
+    </div>
+
+    <script>
+      const urlInput = document.getElementById
+      ("url-input");
+    const checkButton = document.getElementById("check-button");
+    const clearButton = document.getElementById("clear-button");
+    const result = document.getElementById("result");
+
+  checkButton.addEventListener("click", function() {
+    const url = urlInput.value;
+    if (isValidUrl(url)) {
+      if (isSuspicious(url)) {
+        result.textContent = "Ссылка подозрительна!";
+        result.className = "warning";
+      } else {
+        result.textContent = "Ссылка безопасна.";
+        result.className = "";
+      }
+    } else {
+      result.textContent = "Введите корректный URL-адрес.";
+      result.className = "warning";
+    }
+  });
+
+  clearButton.addEventListener("click", function() {
+    urlInput.value = "";
+    result.textContent = "";
+    result.className = "";
+  });
+
+  function isValidUrl(url) {
+    return url.includes("http://") || url.includes("https://");
+  }
+
+  function isSuspicious(url) {
+    if (url.includes("lab") || url.includes("scam") || url.includes("fishing")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+</script>
+</body>
+</html>
